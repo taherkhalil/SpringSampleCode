@@ -11,12 +11,12 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
-	<context:component-scan base-package="com.taher.springasg" />
+	<context:component-scan base-package="com.taher.springasg.controller" />
 
 	<mvc:annotation-driven />
 	
-	
-	  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- <bean name ="login" class="com.taher.springasg.model.LoginBean"></bean> -->
+ 	  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name="prefix" value="/WEB-INF/jsp/" />
       <property name="suffix" value=".jsp" />
    </bean>
