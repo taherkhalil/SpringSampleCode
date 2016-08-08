@@ -45,7 +45,7 @@ public class CartController {
 		if (!result.hasErrors()) {
 			if (loginBean.getEmail().equals("taher@gmail.com") && loginBean.getPassword().equals("1234")) {
 				redirectAttributes.addFlashAttribute("msg", "welcome" + loginBean.getEmail());
-				model.addAttribute("msg", "welcome" + loginBean.getEmail());
+				model.addAttribute("msg   ", "welcome" + loginBean.getEmail());
 
 				model.addAttribute("ProductBean", new ProductBean());
 				return "redirect:products";

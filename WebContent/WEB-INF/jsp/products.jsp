@@ -8,9 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>hey</h1>
+	<h1>hey</h1>
 	<h2>${msg}</h2>
-	<form:form  commandName="ProductBean">
- 	<c:forEach var ="stockmap" items="${stockmap}"> <td>${stockmap.key}</td><br/></c:forEach>
-</form:form></body>
+	<form:form commandName="ProductBean">
+
+		<c:forEach var="stockmap" items="${stockmap}">
+			<td>${stockmap.key}</td>
+			<br />
+		</c:forEach>
+	</form:form>
+</body>
 </html>
