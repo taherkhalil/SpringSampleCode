@@ -1,21 +1,21 @@
 package com.taher.springasg.model;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
-import com.sun.istack.internal.NotNull;
 
 public class LoginBean {
-	@NotNull
-    @Email
-    private String email;
- 
-    @NotNull
-    @Size(min = 6, max = 15)
-    private String password;
-    
-	  public String getEmail() {
+	@NotNull(message="Null Email!!!")
+	@Email(message="Invalid email address entered!!!")
+	private String email;
+
+	@NotNull(message="Null Password!!!")
+	@Size(min = 4, max = 15, message="Invalid length of password!!!")
+	private String password;
+
+	public String getEmail() {
 		return email;
 	}
 
@@ -30,6 +30,5 @@ public class LoginBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 
 }
