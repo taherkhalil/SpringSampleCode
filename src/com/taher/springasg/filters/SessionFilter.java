@@ -57,7 +57,8 @@ public class SessionFilter implements Filter {
 			}
 		}
 //		
-
+System.out.println(req.getRequestURL());
+System.out.println(req.getMethod());
 		chain.doFilter(req, res);
 	}
 

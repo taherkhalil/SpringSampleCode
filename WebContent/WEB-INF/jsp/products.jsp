@@ -12,20 +12,27 @@
 <body>
 
 	<h1><c:out value="${username}"/></h1>
+	<%-- <form:checkbox path="productStock" value="${stockmap}"/> --%>
 	
 	
-	<% out.print(request.getSession().getAttribute("yahoo")); %>
+	<% out.print(request.getSession().getAttribute("username")); %>
+	jstl wala:<c:out value="${sessionScope.username }"/>
 	<h2>${msg}</h2>
 <!-- 	<a href="test.htm">Click here to test Exception handling</a> -->
-	<form:form commandName="ProductBean" method="POST" action="add">
 
-		<c:forEach var="stockmap" items="${stockmap}">
-		<td><form:checkbox path="productStock" value="${stockmap}"/>
+	<form:form commandName="productBean" method="POST"  action="display">
+
+		
+		
+			  <form:select path="productStock" name ="items" required= "required" multiple="multiple">
+			  <c:forEach var="stockmap" items="${stockmap}">
+			  <option  value="${stockmap}"> <c:out value="${stockmap.key} "></c:out></option>
 			  
-			   <c:out value="${stockmap.key} "></c:out></td>
 			<br />
-		</c:forEach>
-		<form:button>submit</form:button>
+			</c:forEach>
+			</form:select>
+		
+		<form:button name="add" value="submit">submit</form:button>
 	</form:form>
 </body>
 </html>

@@ -1,22 +1,18 @@
 package com.taher.springasg.controller;
 
-import java.io.IOException;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +22,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.taher.springasg.model.LoginBean;
 import com.taher.springasg.model.LoginValidator;
+import com.taher.springasg.model.Product;
 import com.taher.springasg.model.ProductBean;
 
 @Controller
 public class CartController {
+	Map<Integer, String> map = new HashMap<Integer, String>();
 	@Autowired
 	LoginValidator logValidator;
 
@@ -47,8 +45,8 @@ public class CartController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String submit(Model model, @ModelAttribute("loginBean") /* @Validated */ LoginBean loginBean,
-			final RedirectAttributes redirectAttributes, BindingResult result, HttpServletRequest request, HttpServletResponse response,
-			HttpSession session) {
+			final RedirectAttributes redirectAttributes, BindingResult result, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
 		System.out.println("asd");
 		logValidator.validate(loginBean, result);
 		System.out.println("result.hasErrors() : " + result.hasErrors());
@@ -71,8 +69,8 @@ public class CartController {
 				redirectAttributes.addFlashAttribute("msg", "welcome" + loginBean.getEmail());
 				model.addAttribute("msg", "welcome   " + loginBean.getEmail());
 
-				model.addAttribute("ProductBean", new ProductBean());
-				
+				model.addAttribute("productBean", new ProductBean());
+
 				return "redirect:products";
 
 			} else {
@@ -88,46 +86,43 @@ public class CartController {
 		}
 
 	}
-	// @RequestMapping(value="/login", method = RequestMethod.GET)
-	// private void startSession(LoginBean user, HttpServletRequest request,
-	// HttpServletResponse response) {
-	//
-	// }
 
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
-	public String products(Model model, @ModelAttribute("ProductBean") ProductBean productBean,
+	public String products(Model model, @ModelAttribute("productBean") ProductBean productBean,
 			@ModelAttribute("LoginBean") LoginBean user) {
 
-//		System.out.println("session created");
-//
-//		session.setAttribute("username", user.getEmail());
-//		session.setAttribute("yahoo", " yahoo karo");
-//		System.out.println(user.getEmail());
-//		System.out.println(session.getAttribute("username"));
-//		System.out.println(session.getAttribute("yahoo"));
-//		session.setAttribute("sessID", session.getId());
-//		session.setMaxInactiveInterval(1000);
-//
-//		System.out.println(session.getId());
-//		Cookie cookie = new Cookie("sessID", session.getId());
-//		cookie.setMaxAge(10000);
-//		response.addCookie(cookie);
 		model.addAttribute("stockmap", productBean.getProductStock());
 		model.addAttribute("stockprice", productBean.getProductPrice());
 		return "/products";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addToCart(Model model, @ModelAttribute("ProductBean") ProductBean productBean) {
+	@RequestMapping(value = "/display",method=RequestMethod.POST)
+	public String addToCart(@ModelAttribute("productBean") Product product, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) {
 		System.out.println("adka");
-		return "redirect:display";
-	}
-
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public String show(Model model, @ModelAttribute("ProductBean") ProductBean productBean) {
-		System.out.println("show called");
+		if (request.getParameter("add") != null) {
+			System.out.println("add got");
+			System.out.println( request.getParameterValues("productStock"));
+			String[] shopingItems = request.getParameterValues("productStock");
+			for (int i = 0; i < shopingItems.length; i++) {
+				
+				map.put(new Integer(i + 1), shopingItems[i]);
+			}
+			System.out.println("product");
+			for(String temp: product.getProductStock()) {
+				System.out.println(temp);
+			}
+		}
+		session.setAttribute("map", map);
 		return "display";
 	}
+
+	/*@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public String show(Model model, @ModelAttribute("ProductBean") ProductBean productBean) {
+
+		System.out.println("show called");
+		return "display";
+	}*/
 
 	// @RequestMapping(value = "/test.htm")
 	// public String test() throws IOException {
