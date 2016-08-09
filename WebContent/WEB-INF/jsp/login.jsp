@@ -19,7 +19,7 @@
 		<br />
 		<input type="submit" value="login">
 		<div style="color: red">${error1}</div>
-		</div>
+		
 	</form:form>
 </body>
 </html>
