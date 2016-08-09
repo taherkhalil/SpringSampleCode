@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%-- <%@ page session="false" %> --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,14 +10,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>yo</h1>
-
-${username}
-<h3><c:out value="${username}"/></h3>
-
-
-<h1><c:out value="${session.username}"/></h1>
-<c:out value="${sessionScope.username }"/>
-<c:forEach var ="map" items="${map}"> <td>${map.key}</td><br/><td>${map.value}<br/></td></c:forEach>
+	<h3>
+		<c:out value="${username}" />
+	</h3>
+	<br />
+	<c:forEach var="map" items="${map}">
+		<td>${map.key}</td>.<td>${map.value}<br /></td>
+	</c:forEach>
+	<c:forEach var="stockprice" items="${stockprice}">
+		<c:out value="${stockprice.value} "></c:out>
+		<br />
+	</c:forEach>
 </body>
 </html>

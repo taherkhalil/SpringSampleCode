@@ -89,27 +89,28 @@ public class CartController {
 
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public String products(Model model, @ModelAttribute("productBean") ProductBean productBean,
-			@ModelAttribute("LoginBean") LoginBean user) {
+			@ModelAttribute("LoginBean") LoginBean user,HttpSession session) {
 
 		model.addAttribute("stockmap", productBean.getProductStock());
 		model.addAttribute("stockprice", productBean.getProductPrice());
+		session.setAttribute("stockprice", productBean.getProductPrice());
 		return "/products";
 	}
 
-	@RequestMapping(value = "/display",method=RequestMethod.POST)
+	@RequestMapping(value = "/display", method = RequestMethod.POST)
 	public String addToCart(@ModelAttribute("productBean") Product product, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		System.out.println("adka");
 		if (request.getParameter("add") != null) {
 			System.out.println("add got");
-			System.out.println( request.getParameterValues("productStock"));
+			System.out.println(request.getParameterValues("productStock"));
 			String[] shopingItems = request.getParameterValues("productStock");
 			for (int i = 0; i < shopingItems.length; i++) {
-				
+
 				map.put(new Integer(i + 1), shopingItems[i]);
 			}
 			System.out.println("product");
-			for(String temp: product.getProductStock()) {
+			for (String temp : product.getProductStock()) {
 				System.out.println(temp);
 			}
 		}
@@ -117,12 +118,13 @@ public class CartController {
 		return "display";
 	}
 
-	/*@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public String show(Model model, @ModelAttribute("ProductBean") ProductBean productBean) {
-
-		System.out.println("show called");
-		return "display";
-	}*/
+	/*
+	 * @RequestMapping(value = "/display", method = RequestMethod.GET) public
+	 * String show(Model model, @ModelAttribute("ProductBean") ProductBean
+	 * productBean) {
+	 * 
+	 * System.out.println("show called"); return "display"; }
+	 */
 
 	// @RequestMapping(value = "/test.htm")
 	// public String test() throws IOException {
