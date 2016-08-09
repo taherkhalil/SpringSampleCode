@@ -18,7 +18,9 @@
 		<td>${map.key}</td>.<td>${map.value}<br /></td>
 	</c:forEach>
 	<c:forEach var="stockprice" items="${stockprice}">
-		<c:out value="${stockprice.value} "></c:out>
+	<%-- <c:if test="${map.value == stockprice.key}"> --%>
+	<c:if test="${sessionScope.map.value == sessionScope.stockprice.key}">
+		<c:out value="${stockprice.value} "></c:out></c:if>
 		<br />
 	</c:forEach>
 </body>
