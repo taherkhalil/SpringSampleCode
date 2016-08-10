@@ -14,14 +14,13 @@
 
 	<mvc:annotation-driven />
 
-	<bean name="LoginBean" class="com.taher.springasg.model.LoginBean"></bean>
-	<!-- <bean name="exceptionHandler" class="com.taher.springasg.controller.ExceptionHandlerController"></bean> -->
+	<bean name="LoginBean" class="com.taher.springasg.model.LoginBean" autowire="byName"></bean>
+	<!--  <bean name="exceptionHandler" class="com.taher.springasg.controller.ExceptionHandlerController"></bean>  -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<!-- <bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-	 --><bean id="loginValidator" class="com.taher.springasg.model.LoginValidator"></bean>
+	<bean id="loginValidator" class="com.taher.springasg.model.LoginValidator"></bean>
 
 </beans>

@@ -7,30 +7,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Select Product</title>
 </head>
 <body>
-	
-<h1>welcome: 
-	<% out.print(request.getSession().getAttribute("username")); %>  </h1>
+	<h1>
+		welcome:
+		<%
+		out.print(request.getSession().getAttribute("username"));
+	%>
+	</h1>
 
 	<!-- 	<a href="test.htm">Click here to test Exception handling</a> -->
-
+	<c:forEach var="pricemap" items="${pricemap}">
+			${pricemap.value}
+						price:<c:out value="${pricemap.value} "></c:out>
+	</c:forEach>
+	<br />
 	<form:form commandName="productBean" method="POST" action="display">
-
-
-
 		<form:select path="productStock" name="items" required="required"
 			multiple="multiple">
-			<c:forEach var="stockmap" items="${stockmap}">
-				<option value="${stockmap.key}">
-					<c:out value="${stockmap.key} "></c:out></option>
-
-				<br />
+			<c:forEach var="pricemap" items="${pricemap}">
+				<option value="${pricemap}">
+					<c:out value="${pricemap.key} "></c:out></option>
 			</c:forEach>
 		</form:select>
-
 		<form:button name="add" value="submit">submit</form:button>
 	</form:form>
+	<form method="GET" action="logout">
+		<input type="submit" value="logout">
+	</form>
 </body>
 </html>

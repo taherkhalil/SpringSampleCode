@@ -14,7 +14,7 @@ public class LoginValidator  implements Validator{
 	@Override
 	public void validate(Object obj, Errors errors) {
 		System.out.println("class : " + obj.getClass());
-		LoginBean login= (LoginBean) obj;
+		//LoginBean login= (LoginBean) obj;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email","error.email", "enter username");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password","error.password", "enter password");
 	}

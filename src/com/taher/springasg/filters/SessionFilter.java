@@ -8,12 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter({"/products", "/display"})
+@WebFilter({"/products", "/display","/logout"})
 public class SessionFilter implements Filter {
 
 	public SessionFilter() {
@@ -43,7 +42,9 @@ public class SessionFilter implements Filter {
 	
 		if (isLogoutUri(currUri, contextPath)) {
 			if (!isSessionExpired(req)) {
+			
 				req.getSession(false).invalidate();
+				System.out.println("session invalidated");
 				res.sendRedirect(redirectUrl);
 				return;
 			}
@@ -56,7 +57,7 @@ public class SessionFilter implements Filter {
 				return;
 			}
 		}
-//		
+	
 System.out.println(req.getRequestURL());
 System.out.println(req.getMethod());
 		chain.doFilter(req, res);
@@ -87,9 +88,9 @@ System.out.println(req.getMethod());
 		return currUri.equals(contextPath + "/login");
 	}
 
-	private boolean isSessionValid(HttpServletRequest req) {
-		return req.getSession(false).getAttribute("username") != null;
-	}
+//	private boolean isSessionValid(HttpServletRequest req) {
+//		return req.getSession(false).getAttribute("username") != null;
+//	}
 
 	private boolean isLogoutUri(String currUri, String contextPath) {
 		return currUri.equals(contextPath + "/logout");
