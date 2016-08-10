@@ -11,10 +11,10 @@
 
 <body>
 	<form:form method="POST" commandName="loginBean" action="login">
-   Enter User Name:<form:input type="email" path="email" name="email" />
+   Enter User Name:<form:input type="email" path="email" name="email" /><br/>
 		<td><form:errors path="email" cssstyle="color: red;"></form:errors></td>  
    Enter Password :<form:input type="password" path="password"
-			name="password" />
+			name="password" /><br/>
 		<td><form:errors path="password" cssstyle="color: red;"></form:errors></td>
 		<br />
 		<input type="submit" value="login">

@@ -39,7 +39,7 @@ public class CartController {
 			/*@ModelAttribute("productBean") ProductBean productbean,*/ HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) {
 		System.out.println("adka");
-		
+		ProductBean productbean ;
 		if (request.getParameter("add") != null) {
 			System.out.println("add got");
 			map=(Map<Integer, String>) session.getAttribute("map");
@@ -50,12 +50,15 @@ public class CartController {
 			for (int i = 0; i < shopingItems.length; i++) {
 				
 				map.put(a+1, shopingItems[i]);
+//				Integer stock=productbean.getProductStock().get(map.get(shopingItems[i]));
+//				
+//				productbean.setProductStock("shopingItems[i]",stock--);;
 			}
 
-			System.out.println("product");
-			for (String temp : product.getProductStock()) {
-				System.out.println(temp);
-			}
+//			System.out.println("product");
+//			for (String temp : product.getProductStock()) {
+//				System.out.println(temp);
+//			}
 			request.setAttribute("map", map);
 			session.setAttribute("map", map);
 		} else if (request.getParameter("del") != null) {
@@ -69,7 +72,17 @@ public class CartController {
 		}
 		return "display";
 	}
-
+	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
+	public String checkOut(Model model, @ModelAttribute("productBean") ProductBean productBean,
+			@ModelAttribute("LoginBean") LoginBean user, HttpSession session)
+	{
+		
+//		Integer stock=productBean.getProductStock().get(map.get());
+//		productBean.setProductStock("shopingItems[i]",stock--);;
+		map=(Map<Integer, String>) session.getAttribute("map");
+		session.setAttribute("sum", productBean.getProductPrice().values().toString());
+		return "checkout";
+	}
 	/*
 	 * @RequestMapping(value = "/display", method = RequestMethod.GET) public
 	 * String show(Model model, @ModelAttribute("ProductBean") ProductBean
