@@ -18,10 +18,10 @@
 	</h1>
 
 	<!-- 	<a href="test.htm">Click here to test Exception handling</a> -->
-	<c:forEach var="pricemap" items="${pricemap}">
+<%-- 	<c:forEach var="pricemap" items="${pricemap}">
 			${pricemap.value}
 						price:<c:out value="${pricemap.value} "></c:out>
-	</c:forEach>
+	</c:forEach> --%>
 	<br />
 	<form:form commandName="productBean" method="POST" action="display">
 		<form:select path="productStock" name="items" required="required"

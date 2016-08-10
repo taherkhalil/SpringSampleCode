@@ -1,4 +1,4 @@
-/*package com.taher.springasg.controller;
+package com.taher.springasg.controller;
 
 import java.util.Date;
 
@@ -23,4 +23,3 @@ public class ExceptionHandlerController {
 		return mav;
 	}
 }
-*/

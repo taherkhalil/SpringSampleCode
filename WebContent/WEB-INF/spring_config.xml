@@ -15,7 +15,8 @@
 	<mvc:annotation-driven />
 
 	<bean name="LoginBean" class="com.taher.springasg.model.LoginBean" autowire="byName"></bean>
-	<!--  <bean name="exceptionHandler" class="com.taher.springasg.controller.ExceptionHandlerController"></bean>  -->
+	
+	  <bean name="exceptionHandler" class="com.taher.springasg.controller.ExceptionHandlerController"></bean> 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
