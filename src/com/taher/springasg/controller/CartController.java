@@ -23,8 +23,8 @@ public class CartController {
 	public String products(Model model, @ModelAttribute("productBean") ProductBean productBean,
 			@ModelAttribute("LoginBean") LoginBean user, HttpSession session) {
 
-		model.addAttribute("stockmap", productBean.getProductStock());
-		 model.addAttribute("pricemap", productBean.getProductPrice());
+		//model.addAttribute("stockmap", productBean.getProductStock());
+		 //model.addAttribute("pricemap", productBean.getProductPrice());
 		session.setAttribute("pricemap", productBean.getProductPrice());
 		session.setAttribute("stockmap", productBean.getProductStock());
 		session.setAttribute("stockValue", productBean.getProductStockValue());
