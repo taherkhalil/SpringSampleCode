@@ -22,6 +22,7 @@
 			${pricemap.value}
 						price:<c:out value="${pricemap.value} "></c:out>
 	</c:forEach> --%>
+	
 	<br />
 	<form:form commandName="productBean" method="POST" action="display">
 		<form:select path="productStock" name="items" required="required"
